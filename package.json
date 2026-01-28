@@ -1,0 +1,53 @@
+{
+  "name": "ransomware-endpoint-security",
+  "version": "1.0.0",
+  "description": "Desktop Endpoint Security System for Ransomware Detection",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "python app.py",
+    "electron": "electron .",
+    "electron:dev": "set ELECTRON_IS_DEV=true && electron .",
+    "electron:build": "electron-builder",
+    "electron:build:win": "electron-builder --win",
+    "electron:build:mac": "electron-builder --mac",
+    "electron:build:linux": "electron-builder --linux",
+    "dev": "concurrently \"npm run start\" \"wait-on http://localhost:5000 && npm run electron:dev\""
+  },
+  "build": {
+    "appId": "com.ransomware.security",
+    "productName": "Ransomware Security",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "electron/**/*",
+      "src/**/*",
+      "static/**/*",
+      "templates/**/*",
+      "model/**/*",
+      "app.py",
+      "requirements.txt",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "dependencies": {
+    "electron": "^25.0.0",
+    "chokidar": "^3.5.3",
+    "electron-store": "^8.1.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "electron-builder": "^24.0.0",
+    "wait-on": "^7.0.1"
+  }
+}
